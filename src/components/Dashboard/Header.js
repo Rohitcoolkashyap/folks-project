@@ -71,7 +71,7 @@ export default function Header() {
                 <p style={{marginRight:20,color:	'#bfbfbf'}}>Login</p>
                 <Button>Sign Up</Button>
             </Box>
-            {!menu && <p>me</p>}
+            {menu && <p>menu</p>}
         </Container>
     )
 }
