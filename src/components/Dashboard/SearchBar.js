@@ -63,7 +63,7 @@ setLoading(true);
         console.log(error.error);
         setLoading(true);
 
-        // setError(error);
+        setError('Not a valid link');
       }
      
     }
@@ -83,7 +83,8 @@ setLoading(true);
     return (
       <div>
         <BoxSearch mb={6}>
-            <Input onFocus={() => setError('')} style={{color:error && 'red',border:error && '1px solid red'}} value={error ? error:input} onChange={(e) => setInput(e.target.value)}  type="text" placeholder="Shorten a link here..."/>
+            <Input onFocus={() => {setError('');
+            setLoading(false)}} style={{color:error && 'red',border:error && '1px solid red'}} value={error ? error:input} onChange={(e) => setInput(e.target.value)}  type="text" placeholder="Shorten a link here..."/>
             <Button onClick={handleSearch} style={{borderRadius:5,padding:'13px 20px'}}>Shorten It!</Button>
             
             </BoxSearch>
