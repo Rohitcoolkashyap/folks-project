@@ -6,9 +6,12 @@ const Title = styled.h1`
   font-size: 1.5em;
   text-align: center;
   color: rgb(75, 73, 73);
+  cursor:pointer;
 
   @media (max-width: 480px) {
-    font-size: 12px;
+    text-align: left;
+margin-left:10px;
+    font-size: 28px;                                                                                                                                                                                                                                                                                                              px;
 
   }
 `;
@@ -20,19 +23,53 @@ const Box = styled.div`
     flex-direction:column;
   }
 `;
+const MainBox = styled.div`
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  width:100%;
+
+  @media (max-width: 480px) {
+    flex-direction:column;
+   
+      display: block;
+      position: absolute;
+      top: 0px;
+      left: 0;
+      margin-top:80px;
+      background-color: #3b3054;
+      color: #ffffff;
+      width: 90%;
+      // margin:auto;
+      height: 40vh;
+      border-right: #ccc 1px solid;
+      padding: 15px;
+      z-index: 4;
+      border-radius:10px;
+      transform: translateY(-500px);
+      transition: transform 0.3s ease-in-out;
+        align-items:flex-start;
+        justify-content:unset;
+
+      
+    }
+  
+  }
+`;
 const Container = styled.div`
   display:flex;
-  justify-content:space-between;
+  // justify-content:space-between;
   align-items:center;
   margin-top:10px;
   margin-bottom:80px;
+  padding:20px;
 position:relative;
+
   @media (max-width: 480px) {
-    padding: 4px !important;
-    margin:0;
-    flex-direction:column;
-    top:-100px;
-    transition:0s ease-in-out;
+  width:90%;
+  padding:10px;
+
+
 
 
   }
@@ -44,21 +81,65 @@ const Nav = styled.ul`
   margin-left:20px;
 
   @media (max-width: 480px) {
-   
+    flex-direction:column;
+margin-bottom:40px;
   }
 `;
 const NavItem = styled.li`
-margin-right:10px;
+margin-right:20px;
 color:grey;
 font-size:12px;
+cursor:pointer;
+
+@media (max-width: 480px) {
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  margin-bottom:30px;
+
+}
+`;
+const Menu = styled.img`
+margin-right:20px;
+width:33px;
+cursor:pointer;
+display:none;
+z-index:200;
+
+
+@media (max-width: 480px) {
+   display:block;
+   margin-left:auto;
+   position:absolute;
+   right:0;
+   margin-right:0px;
+}
+
+`;
+
+const Para1 = styled.p`
+
+margin-right:20px;
+color:#bfbfbf;
+cursor:pointer;
+
+@media (max-width: 480px) {
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  margin-bottom:30px;
+
+}
 `;
 
 export default function Header() {
   const [menu,setMenu] = useState(false);
+  const handleMenu = menu ? "main-nav show" : "main-nav";
     return (
-        <Container>
-            <Box>
+        <Container className={menu ? 'goDown':""}>
                 <Title>Shortly</Title>
+
+            <MainBox  className={handleMenu}>
                 <Nav>
                     <NavItem>Features</NavItem>
                     <NavItem>Pricing</NavItem>
@@ -66,12 +147,19 @@ export default function Header() {
                     <NavItem>Resources</NavItem>
 
                 </Nav>
-            </Box>
-            <Box>
-                <p style={{marginRight:20,color:	'#bfbfbf'}}>Login</p>
+
+                <Box>
+                <Para1>Login</Para1>
                 <Button>Sign Up</Button>
+                </Box>
+            </MainBox>
+
+         
+            <Menu id="22" onClick={() => setMenu(prev => !prev)} src="icons8-menu-192.png" alt="fdf"/>
+            <Box>
+        
+
             </Box>
-            {menu && <p>menu</p>}
         </Container>
     )
 }

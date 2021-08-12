@@ -1,27 +1,57 @@
 import React from 'react'
 import Card from '../../components/Main/Card';
-import { Button } from '../../styles/style';
 import styled from 'styled-components';
 const Container = styled.div`
   display:grid;
   place-items:center;
   margin-top:10px;
   margin-bottom:80px;
+  @media (max-width: 480px) {
+    width:90%;
+    margin:auto;
+
 `;
 const Container2 = styled.div`
   display:grid;
   place-items:center;
   margin-top:10px;
-  margin-bottom:80px;
   background:#4b3f6b;
  width:100%;
  height:150px;
 
  @media (max-width: 480px) {
-    height:90px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+    height:240px;
     margin-top:0px;
     margin-bottom:0px;
   }
+`;
+const Button = styled.button`
+color:white;
+padding:10px 18px;
+background-color:#2acfcf;
+border:none;
+border-radius:20px;
+font-weight:600;
+font-size:14px;
+cursor:pointer;
+
+&:hover {
+  background-color:#7cf0f0;
+
+}
+@media (max-width: 480px) {
+  font-size:15px;
+  width:160px;
+  padding:14px 24px;
+
+  border-radius:20px;
+
+}
 `;
 const Title = styled.h1`
   font-size: 2.5em;
@@ -30,7 +60,9 @@ const Title = styled.h1`
   color: ${props => props.color || 'black' };
 
   @media (max-width: 480px) {
-    font-size: 1.2em;
+    font-size: 1.5em;
+    text-align:center;
+margin-bottom:10px;
 
   }
 `;
@@ -45,6 +77,8 @@ color:rgb(185, 182, 282);
 
   @media (max-width: 480px) {
     margin-bottom:10px;
+    font-size: 16px;
+    text-align:center;
 
 
   }

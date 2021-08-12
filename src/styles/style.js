@@ -8,21 +8,26 @@ border:none;
 border-radius:20px;
 font-weight:600;
 font-size:14px;
+cursor:pointer;
+
 &:hover {
   background-color:#7cf0f0;
 
 }
 @media (max-width: 480px) {
-  font-size:12px;
-  padding:5px 9px;
-  border-radius:15px;
+  font-size:15px;
+  width:100%;
+
+  border-radius:20px;
 
 }
 `;
 const Container = styled.div`
   width:80%;
   margin:auto;
- 
+  @media (max-width: 480px) {
+    width:100%;
+  }
 `;
 const Flex = styled.div`
 display:flex;

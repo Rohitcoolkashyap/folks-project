@@ -1,10 +1,7 @@
-import React from 'react'
+import React,{useState} from 'react'
 
 import styled from 'styled-components';
-import { Button } from '../../styles/style';
 import axios from 'axios';
-import { useState } from 'react/cjs/react.development';
-import CopyToClipboard from 'react-copy-to-clipboard';
 const BoxSearch = styled.div`
   width:100%;
   height:10vh;
@@ -15,6 +12,10 @@ const BoxSearch = styled.div`
 
   // background-image:url('bg-boost-desktop.svg');
 margin-bottom:80px;
+@media (max-width: 480px) {
+  flex-direction:column;
+  padding:20px;
+}
 `;
 const Box = styled.div`
 
@@ -32,23 +33,56 @@ margin-right:10px;
 border-radius:5px;
 padding-left:20px;
 border:none;
+@media (max-width: 480px) {
+  font-size:15px;
+  width:93%;
+  margin-right:0px;
+  margin-bottom:10px;
+  height:60px;
+  padding:10px;
+
+
+
+}
 `;
-export default function SearchBar() {
-  const [input,setInput] = useState();
-  const [copy,setCopy] = useState(false);
+const Button = styled.button`
+color:white;
+padding:10px 18px;
+background-color:#2acfcf;
+border:none;
+border-radius:20px;
+font-weight:600;
+font-size:14px;
+cursor:pointer;
+
+&:hover {
+  background-color:#7cf0f0;
+
+}
+@media (max-width: 480px) {
+  font-size:15px;
+  width:100%;
+  height:40px;
+
+  border-radius:20px;
+
+}
+`;
+ function SearchBar() {
+  const [text,setText] = useState();
 const [error,setError] = useState();
 const [loading,setLoading]=useState();
+const [shortenUrls,setShortenUrls] = useState();
+
   const url = 'https://api.shrtco.de/v2/shorten?url=';
-  const [shortenUrls,setShortenUrls] = useState();
   const handleSearch = ()=>{
 setLoading(true);
-    if(!input){
+    if(!text){
       setError('Field is empty')
     }
     async function fetch(){
       try {
-        const {data} = await axios.get(`${url}${input}`);
-        console.log(data.result);
+        const {data} = await axios.get(`${url}${text}`);
         let result = data.result;
         let obj = {
           link1 : result.full_short_link,
@@ -70,21 +104,11 @@ setLoading(true);
     fetch();
 
   }
-  const handleCopy = (copyText)=>{
-      /* Select the text field */
-  // copyText.select();
-  shortenUrls.link1.select();
-  // copyText.setSelectionRange(0, 99999); /* For mobile devices */
-
-  /* Copy the text inside the text field */
-  document.execCommand("copy");
-    setCopy(true);
-  }
+ 
     return (
       <div>
         <BoxSearch mb={6}>
-            <Input onFocus={() => {setError('');
-            setLoading(false)}} style={{color:error && 'red',border:error && '1px solid red'}} value={error ? error:input} onChange={(e) => setInput(e.target.value)}  type="text" placeholder="Shorten a link here..."/>
+            <Input  style={{color:error && 'red',border:error && '1px solid red'}} value={error ? error:text} onChange={(e) => setText(e.target.value)}  type="text" placeholder="Shorten a link here..."/>
             <Button onClick={handleSearch} style={{borderRadius:5,padding:'13px 20px'}}>Shorten It!</Button>
             
             </BoxSearch>
@@ -96,7 +120,7 @@ setLoading(true);
             { (!loading &&  shortenUrls) && 
             <div mt={2}>
               <Box>
-                        <p>{input}</p>
+                        <p>{text}</p>
 <Box>
                 <p>{shortenUrls.link1}</p>
                 <Button onClick={() =>navigator.clipboard.writeText(shortenUrls.link1)}>Copy</Button>
@@ -104,16 +128,16 @@ setLoading(true);
               </Box>
 
                <Box>
-               <p>{input}</p>
+               <p>{text}</p>
                <Box>
 
        <p>{shortenUrls.link2}</p>
-       <Button onClick={() =>navigator.clipboard.writeText(shortenUrls.link2)}>Copy</Button>
+       <Button width="40px"  onClick={() =>navigator.clipboard.writeText(shortenUrls.link2)}>Copy</Button>
      </Box>
      </Box>
 
       <Box>
-      <p>{input}</p>
+      <p>{text}</p>
       <Box>
 
 <p>{shortenUrls.link3}</p>
@@ -126,3 +150,5 @@ setLoading(true);
         </div>
     )
 }
+
+export default SearchBar;

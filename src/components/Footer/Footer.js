@@ -13,6 +13,7 @@ height:30vh;
 @media (max-width: 480px) {
     flex-direction:column;
     height:60vh;
+    width:100%;
 
   }
 `;

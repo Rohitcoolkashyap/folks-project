@@ -17,7 +17,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-/* Landscape phones and down */
-@media (max-width: 480px) {
+.main-nav.show {
+  transform: translateY(10px);
+}
+.goDown {
+  margin-bottom: 400px !important;
 }
